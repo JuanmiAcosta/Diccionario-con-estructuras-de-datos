@@ -27,28 +27,39 @@ private:
     vector<T> v;
 
 public:
-    Bag<T>();
 
+    Bag() {
 
-    Bag<T>(const Bag<T> &other);
+    }
 
+    Bag(const Bag<T> &other) {
 
-    void add(const T &element);
+    }
 
+    void add(const T &element) {
+        v.push_back(T);
+    }
 
-    T get();
+    T get() {
 
+    }
 
-    void clear();
+    void clear() {
 
+    }
 
-    unsigned int size() const;
+    unsigned int size() const {
 
+    }
 
-    bool empty();
+    bool empty() {
 
+    }
 
-    const Bag<T> &operator=(const Bag<T> &cl);
+    const Bag<T> operator=(const Bag<T> &cl) {
+
+    }
+
 
 };
 #endif
