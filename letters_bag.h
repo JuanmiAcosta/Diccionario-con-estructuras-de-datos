@@ -27,16 +27,16 @@ private:
     vector<T> v;
 
 public:
-    Bag();
+    Bag<T>();
 
 
-    Bag(const Bag &other);
+    Bag<T>(const Bag<T> &other);
 
 
-    void add(const Bag &element);
+    void add(const T &element);
 
 
-    Bag get();
+    T get();
 
 
     void clear();
@@ -48,7 +48,7 @@ public:
     bool empty();
 
 
-    Bag &operator=(const Bag &cl);
+    const Bag<T> &operator=(const Bag<T> &cl);
 
 };
 #endif
