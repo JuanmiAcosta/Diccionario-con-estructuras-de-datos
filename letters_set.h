@@ -20,6 +20,7 @@
  */
 
 #include <iostream>
+#include <fstream>
 #include <stack>
 #include <set>
 #include <vector>
@@ -134,7 +135,7 @@ public:
     map<char, LetterInfo> getLetters();
 
     /**
-      @brief Inicializa un LettersSet con un fichero con valor del método.
+      @brief Inicializa un LettersSet con un fichero como valor del método.
       @param filename fichero del que recabar los datos.
       @post Se crea un LetterSet a partir de los datos del fichero.
     **/

@@ -1,7 +1,8 @@
 #include "letters_set.h"
 
 LettersSet & LettersSet::operator= (const LettersSet &cl){
-     this->letters = cl.letters;
+     map<char,LetterInfo> aux (cl.letters);
+     this->letters.swap(aux);
 }
 
 map<char, LetterInfo> LettersSet::getLetters(){
@@ -12,6 +13,25 @@ LettersSet::LettersSet(){}
 
 LettersSet::LettersSet( const LettersSet &other){
     (*this) = other;
+}
+
+LettersSet::LettersSet(const string filename){
+    ifstream f(filename, ios::in); //Abrimos el fichero
+    if(!f){
+        cerr << "Error abriendo el fichero " << filename << "\n";
+        exit(1);
+    }
+    else{
+        string cad_magica;
+        getline(f,cad_magica);
+        if (cad_magica != "Letra Cantidad Puntos"){
+            cerr << "No es el fichero correcto, la cadena a comprobar es \"Letra Cantidad Puntos\"";
+            exit(1);
+        }
+        else{
+            f >> *this;
+        }
+    }
 }
 
 bool LettersSet::insert (const pair< char, LetterInfo> & val){
@@ -57,7 +77,7 @@ int LettersSet::getScore (string word){
 }
 
 LetterInfo& LettersSet::operator [] (const char &val){
-    return this->letters['val'];
+    return this->letters[val];
 }
 
 ostream& operator << (ostream &os, const LettersSet &cl){
@@ -69,14 +89,23 @@ ostream& operator << (ostream &os, const LettersSet &cl){
     }
     return os;
 }
-/*
-istream& operator >>(istream &is, LettersSet &cl){
-    const int letras=27;
-    char Letra = 0;
-    int Cantidad=0, Puntos=0;
 
-    for (int i=0; i<letras; i++){
-        // A ver cómo se hace esto xd
+istream& operator >>(istream &is, LettersSet &cl){
+
+    char Letra;
+    int Cant;
+    int Punt;
+
+    while (is){
+        is >> Letra >> Cant >> Punt;
+        LetterInfo aux;
+        aux.repetitions=Cant;
+        aux.score=Punt;
+        pair <char, LetterInfo> futLetters;
+        futLetters.first=Letra;
+        futLetters.second=aux;
+        cl.insert(futLetters);
     }
+
+    return is;
 }
- */
