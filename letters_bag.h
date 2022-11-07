@@ -33,31 +33,35 @@ public:
     }
 
     Bag(const Bag<T> &other) {
-
+        (*this) = other;
     }
 
     void add(const T &element) {
-        v.push_back(T);
+        v.push_back(element);
     }
 
     T get() {
-
+        int aux;
+        srand(time(NULL));
+        aux=rand()%v.size();
+        return v.at(aux);
     }
 
     void clear() {
-
+        v.clear();
     }
 
     unsigned int size() const {
-
+        return v.size();
     }
 
     bool empty() {
-
+        return v.empty();
     }
 
     const Bag<T> operator=(const Bag<T> &cl) {
-
+        v.clear();
+        v=cl.v;
     }
 
 
