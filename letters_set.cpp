@@ -76,7 +76,7 @@ int LettersSet::getScore (string word){ // SE PUEDE HACER CON TOUPPER, YA SE HAR
         char letra_mayu=(*it);
 
         if ((*it) >= COMIENZO_MINUS && (*it) <= FINAL_MINUS){//comienzo de letras mayu
-            letra_mayu = (*it)-DIST_MIN_MAY; //distancia de letra min a letra mayu
+            letra_mayu = toupper((*it)); //distancia de letra min a letra mayu
         }
         suma += this->getLetters()[letra_mayu].score;
 
