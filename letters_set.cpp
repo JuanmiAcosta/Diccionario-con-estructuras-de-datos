@@ -36,12 +36,14 @@ LettersSet::LettersSet(const string filename){
 
 bool LettersSet::insert (const pair< char, LetterInfo> & val){
     bool exito=false;
-    if (this->getLetters().at(val.first).repetitions == 0){
+
+    if (this->getLetters()[val.first].repetitions == 0) {
         letters.insert(val);
-        exito=true;
-    }else if(this->getLetters().at(val.first).repetitions > 0){
-        this->getLetters().at(val.first).repetitions++;
+        exito = true;
+    }else if(this->getLetters()[val.first].repetitions > 0){
+        this->getLetters()[val.first].repetitions++;
     }
+
     return exito;
 }
 
@@ -68,10 +70,16 @@ unsigned int LettersSet::size() const{
     return (this->letters.size());
 }
 
-int LettersSet::getScore (string word){
+int LettersSet::getScore (string word){ // SE PUEDE HACER CON TOUPPER, YA SE HARÁ.
     int suma=0;
-    for (int i=0; i<word.size(); i++){
-        suma+=this->letters.at(i).score;
+    for ( string::iterator it=word.begin(); it!=word.end(); ++it){
+        char letra_mayu=(*it);
+
+        if ((*it) >= COMIENZO_MINUS && (*it) <= FINAL_MINUS){//comienzo de letras mayu
+            letra_mayu = (*it)-DIST_MIN_MAY; //distancia de letra min a letra mayu
+        }
+        suma += this->getLetters()[letra_mayu].score;
+
     }
     return suma;
 }
@@ -97,6 +105,7 @@ istream& operator >>(istream &is, LettersSet &cl){
     int Punt;
 
     while (is){
+        bool exito=true;
         is >> Letra >> Cant >> Punt;
         LetterInfo aux;
         aux.repetitions=Cant;
@@ -104,7 +113,8 @@ istream& operator >>(istream &is, LettersSet &cl){
         pair <char, LetterInfo> futLetters;
         futLetters.first=Letra;
         futLetters.second=aux;
-        cl.insert(futLetters);
+        exito=cl.insert(futLetters);
+
     }
 
     return is;

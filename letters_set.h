@@ -26,9 +26,13 @@
 #include <vector>
 #include <map>
 #include <string>
-#include<algorithm>
+#include <algorithm>
 
 using namespace std;
+
+const int COMIENZO_MINUS = 97; //a
+const int FINAL_MINUS = 122; //z
+const int DIST_MIN_MAY = 32; //a-A
 
 struct LetterInfo {
     int repetitions;
