@@ -1,8 +1,8 @@
 #include "letters_set.h"
 
 LettersSet & LettersSet::operator= (const LettersSet &cl){
-     map<char,LetterInfo> aux (cl.letters);
-     this->letters.swap(aux);
+    map<char,LetterInfo> aux (cl.letters);
+    this->letters.swap(aux);
 }
 
 map<char, LetterInfo> LettersSet::getLetters(){

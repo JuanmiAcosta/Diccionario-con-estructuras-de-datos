@@ -15,54 +15,22 @@
 #include <map>
 #include <string>
 #include<algorithm>
+#include "bag.h"
+#include "letters_set.h"
 
 using namespace std;
-
-template <class T>
-class Bag {
+class LettersBag {
 private:
-    /**
-      @brief Es el vector interno de la clase. Con el podremos acceder a las repeticiones y puntaje de las letras.
-    **/
-    vector<T> v;
-
+    Bag <char> letters;
 public:
-
-    Bag() {
-
-    }
-
-    Bag(const Bag<T> &other) {
-        (*this) = other;
-    }
-
-    void add(const T &element) {
-        v.push_back(element);
-    }
-
-    T get() {
-        int aux;
-        srand(time(NULL));
-        aux=rand()%v.size();
-        return v.at(aux);
-    }
-
-    void clear() {
-        v.clear();
-    }
-
-    unsigned int size() const {
-        return v.size();
-    }
-
-    bool empty() {
-        return v.empty();
-    }
-
-    const Bag<T> operator=(const Bag<T> &cl) {
-        v.clear();
-        v=cl.v;
-    }
+    LettersBag();
+    LettersBag(const LettersSet & letterSet);
+    void insertLetter (const char & l);
+    char extractLetter();
+    vector<char> extractLetters(int num);
+    void clear();
+    unsigned  int size();
+    LettersBag operator=(const LettersBag &cl);
 
 
 };

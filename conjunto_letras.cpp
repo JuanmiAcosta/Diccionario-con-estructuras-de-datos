@@ -19,11 +19,11 @@ int main(int argc, char *argv[]){
 
     LettersSet Letras(argv[1]); // hay que cambiar los parametros , los de ahora son para probar
 
-    cout << Letras.getScore(palabra);
+    cout << Letras.getScore(palabra) << endl;
 
     return(0);
 }
-
+// args data/letras.text hola
 
 
 
