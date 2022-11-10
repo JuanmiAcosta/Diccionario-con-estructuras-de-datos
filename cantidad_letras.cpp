@@ -35,7 +35,7 @@ int main(int argc, char *argv[]){
         int num1;float num2;
         num1=diccionario.getOcurrences((*it).first);
         num2=diccionario.getTotalLetters();
-        cout<<(*it).first<<" "<<num1<<" "<<num1/num2<<endl;
+        cout<<(*it).first<<"/t"<<num1<<"/t"<<num1/num2<<endl;
     }
     return(0);
 }
