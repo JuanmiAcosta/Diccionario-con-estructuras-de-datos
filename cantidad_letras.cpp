@@ -5,10 +5,22 @@
 #include<fstream>
 #include "letters_set.h"
 #include "bag.h"
-#include "letters_bag.h"
 #include "dictionary.h"
 
 using namespace std;
+
+bool existe (map<char, LetterInfo> letras,char letra){
+    bool existe=true;
+
+    map<char,LetterInfo>::iterator it;
+
+    it=letras.find(letra);
+
+    if (it == letras.end())
+        existe=false;
+
+    return existe;
+}
 
 int main(int argc, char *argv[]){
 
@@ -24,18 +36,29 @@ int main(int argc, char *argv[]){
 
     std::ifstream file2(argv[2]);
     LettersSet lettersSet;
-
+    string aux;
+    getline(file2,aux);
     file2>>lettersSet;
-    map<char, LetterInfo> letras=lettersSet.getLetters();
+
+
+    map<char, LetterInfo> letras = lettersSet.getLetters();
     map<char, LetterInfo>:: iterator it;
+
     int num1=0;
-    int num2=0;
-    cout<<"Letra "<<"FAbs. "<<"Frel. "<<endl;
+    float num2=0;
+    cout<<"Letra\tFAbs.\tFrel."<<endl;
+
+    num2=diccionario.getTotalLetters();
+
     for( it=letras.begin();it!=letras.end();it++){
-        int num1;float num2;
-        num1=diccionario.getOcurrences((*it).first);
-        num2=diccionario.getTotalLetters();
-        cout<<(*it).first<<"/t"<<num1<<"/t"<<num1/num2<<endl;
+        if (existe(letras, it->first)) {
+            num1 = diccionario.getOcurrences((*it).first);
+
+            cout << (*it).first << "\t" << num1 << "\t" << num1 / num2 << endl;
+        }
     }
+
     return(0);
 }
+
+
