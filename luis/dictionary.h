@@ -113,5 +113,93 @@ public:
       @post Se le van metiendo los datos del fichero al Diccionario.
     **/
     friend istream& operator >>(istream &is, Dictionary &cl);
+
+    class iterator{
+    private:
+        set<string>::iterator it;
+    public:
+        iterator(){};
+
+        iterator(const set<string>::iterator ot){
+            it = ot;
+        }
+
+        ~iterator(){};
+
+        iterator &operator=(const set<string>::iterator &i){
+            it=i;
+            return (*this);
+        }
+
+        const string operator *() const{
+            return *it;
+        }
+
+        iterator &operator++(){
+            ++it;
+            return (*this);
+        }
+
+        iterator &operator--(){
+            --it;
+            return (*this);
+        }
+
+        iterator &operator--(int){
+            it--;
+            return (*this);
+        }
+
+        iterator &operator++(int){
+            it++;
+            return (*this);
+        }
+
+        bool operator ==(const iterator &ot){
+            return it == ot.it;
+        }
+
+        bool operator !=(const iterator &ot){
+            return it != ot.it;
+        }
+
+    };
+
+    class const_iterator {
+    private:
+        set<string>::const_iterator it;
+    public:
+        const_iterator() {};
+
+        ~const_iterator() {};
+
+        const_iterator(set<string>::const_iterator iterator) {
+
+        }
+    };
+
+    const_iterator cbegin() const{
+        const_iterator it;
+        it = this->words.begin();
+        return it;
+    }
+
+    const_iterator cend() const{
+        const_iterator it;
+        it = this->words.end();
+        return it;
+    }
+
+    iterator begin(){
+        iterator it;
+        it = this->words.begin();
+        return it;
+    }
+
+    iterator end(){
+        iterator it;
+        it = this->words.end();
+        return it;
+    }
 };
 #endif
