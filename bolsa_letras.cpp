@@ -17,7 +17,11 @@ int main(int argc, char *argv[]){
         exit(1);
     }
 
-    LettersSet Letras(argv[1]); // hay que cambiar los parametros , los de ahora son para probar
+    std::ifstream file2(argv[1]);
+    LettersSet Letras;
+    string aux;
+    getline(file2,aux);
+    file2>>Letras; // hay que cambiar los parametros , los de ahora son para probar
     LettersBag BolsaLetras;
     map<char, LetterInfo> mapLetras=Letras.getLetters();
     map<char, LetterInfo>::iterator it;

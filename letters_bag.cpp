@@ -3,7 +3,14 @@ LettersBag::LettersBag(){
 
 }
 LettersBag::LettersBag(const LettersSet & letterSet) {
-    (*this) = letterSet;
+    LettersSet aux=letterSet;
+    map<char, LetterInfo> mapAux=aux.getLetters();
+    map<char, LetterInfo>::iterator it;
+    for(it=mapAux.begin();it!=mapAux.end();++it){
+        for(int i=0;i<(*it).second.repetitions;i++){
+            insertLetter((*it).first);
+        }
+    }
 }
 void LettersBag::insertLetter (const char & l) {
     this->letters.add(l);
@@ -13,8 +20,12 @@ char LettersBag::extractLetter() {
 }
 vector<char> LettersBag::extractLetters(int num) {
     vector<char> aux;
-    for(int i=0;i<num;i++){
-        aux.push_back(this->letters.get());
+    int auxiliar=num;
+    if(num>size()){
+        auxiliar=size();
+    }
+    for(int i=0;i<auxiliar;i++){
+        aux.push_back(extractLetter());
     }
     return aux;
 }

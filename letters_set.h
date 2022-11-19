@@ -137,13 +137,97 @@ public:
     **/
     map<char, LetterInfo> getLetters();
 
-    /**
-      @brief Inicializa un LettersSet con un fichero como valor del método.
-      @param filename fichero del que recabar los datos.
-      @post Se crea un LetterSet a partir de los datos del fichero.
-    **/
-    LettersSet(const string filename);
+    bool existe (char letra);
+
+    class iterator{
+    private:
+        map<char,LetterInfo>::iterator it;
+    public:
+        iterator(){};
+
+        iterator(const map<char,LetterInfo>::iterator ot){
+            it = ot;
+        }
+
+        ~iterator(){};
+
+        iterator &operator=(const map<char,LetterInfo>::iterator &i){
+            it=i;
+            return (*this);
+        }
+
+        const pair<char,LetterInfo> operator *() const{
+            return *it;
+        }
+
+        iterator &operator++(){
+            ++it;
+            return (*this);
+        }
+
+        iterator &operator--(){
+            --it;
+            return (*this);
+        }
+
+        iterator &operator--(int){
+            it--;
+            return (*this);
+        }
+
+        iterator &operator++(int){
+            it++;
+            return (*this);
+        }
+
+        bool operator ==(const iterator &ot){
+            return it == ot.it;
+        }
+
+        bool operator !=(const iterator &ot){
+            return it != ot.it;
+        }
+
+    };
+
+    class const_iterator {
+    private:
+        map<char, LetterInfo>::const_iterator it;
+    public:
+        const_iterator() {};
+
+        ~const_iterator() {};
+
+        const_iterator(map<char, LetterInfo>::const_iterator iterator) {
+
+        }
+    };
+
+    const_iterator cbegin() const{
+        const_iterator it;
+        it = this->letters.begin();
+        return it;
+    }
+
+    const_iterator cend() const{
+        const_iterator it;
+        it = this->letters.end();
+        return it;
+    }
+
+    iterator begin(){
+        iterator it;
+        it = this->letters.begin();
+        return it;
+    }
+
+    iterator end(){
+        iterator it;
+        it = this->letters.end();
+        return it;
+    }
 
 };
+
 
 #endif

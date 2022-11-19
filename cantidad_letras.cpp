@@ -8,7 +8,7 @@
 #include "dictionary.h"
 
 using namespace std;
-
+/*
 bool existe (map<char, LetterInfo> letras,char letra){
     bool existe=true;
 
@@ -20,7 +20,7 @@ bool existe (map<char, LetterInfo> letras,char letra){
         existe=false;
 
     return existe;
-}
+}*/
 
 int main(int argc, char *argv[]){
 
@@ -40,22 +40,15 @@ int main(int argc, char *argv[]){
     getline(file2,aux);
     file2>>lettersSet;
 
-
-    map<char, LetterInfo> letras = lettersSet.getLetters();
-    map<char, LetterInfo>:: iterator it;
-
     int num1=0;
     float num2=0;
     cout<<"Letra\tFAbs.\tFrel."<<endl;
 
     num2=diccionario.getTotalLetters();
 
-    for( it=letras.begin();it!=letras.end();it++){
-        if (existe(letras, it->first)) {
+    for( LettersSet::iterator it=lettersSet.begin();it!=lettersSet.end();it++){
             num1 = diccionario.getOcurrences((*it).first);
-
             cout << (*it).first << "\t" << num1 << "\t" << num1 / num2 << endl;
-        }
     }
 
     return(0);

@@ -6,32 +6,15 @@ LettersSet & LettersSet::operator= (const LettersSet &cl){
 }
 
 map<char, LetterInfo> LettersSet::getLetters(){
-    return this->letters;
+    return letters;
 }
 
-LettersSet::LettersSet(){}
+LettersSet::LettersSet(){
+
+}
 
 LettersSet::LettersSet( const LettersSet &other){
     (*this) = other;
-}
-
-LettersSet::LettersSet(const string filename){
-    ifstream f(filename, ios::in); //Abrimos el fichero
-    if(!f){
-        cerr << "Error abriendo el fichero " << filename << "\n";
-        exit(1);
-    }
-    else{
-        string cad_magica;
-        getline(f,cad_magica);
-        if (cad_magica != "Letra Cantidad Puntos"){
-            cerr << "No es el fichero correcto, la cadena a comprobar es \"Letra Cantidad Puntos\"";
-            exit(1);
-        }
-        else{
-            f >> *this;
-        }
-    }
 }
 
 bool LettersSet::insert (const pair< char, LetterInfo> & val){
@@ -70,7 +53,7 @@ unsigned int LettersSet::size() const{
     return (this->letters.size());
 }
 
-int LettersSet::getScore (string word){ // SE PUEDE HACER CON TOUPPER, YA SE HARÁ.
+int LettersSet::getScore (string word){
     int suma=0;
     for ( string::iterator it=word.begin(); it!=word.end(); ++it){
         char letra_mayu=(*it);
@@ -98,14 +81,23 @@ ostream& operator << (ostream &os, const LettersSet &cl){
     return os;
 }
 
+bool LettersSet::existe (char letra){
+    bool existe=true;
+
+    map<char,LetterInfo>::iterator it;
+
+    it=this->getLetters().find(letra);
+
+    if (it == this->getLetters().end())
+        existe=false;
+
+    return existe;
+}
+
+
 istream& operator >>(istream &is, LettersSet &cl){
-
-    char Letra;
-    int Cant;
-    int Punt;
-
+    char Letra;    int Cant;    int Punt;
     while (is){
-        bool exito=true;
         is >> Letra >> Cant >> Punt;
         LetterInfo aux;
         aux.repetitions=Cant;
@@ -113,9 +105,7 @@ istream& operator >>(istream &is, LettersSet &cl){
         pair <char, LetterInfo> futLetters;
         futLetters.first=Letra;
         futLetters.second=aux;
-        exito=cl.insert(futLetters);
-
+        cl.insert(futLetters);
     }
-
     return is;
 }

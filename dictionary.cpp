@@ -43,9 +43,12 @@ int Dictionary::getOcurrences(const char c) {
 
     for(it=this->words.begin();it!=this->words.end();++it){
 
-        for (char (i) : (*it))
-            if (i == tolower(c))
+        for (char (i) : (*it)) {
+            if (i == tolower(c)) {
                 num++;
+            }
+        }
+
     }
     return num;
 }

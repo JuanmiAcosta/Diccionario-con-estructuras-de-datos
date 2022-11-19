@@ -1,11 +1,120 @@
-/*! \mainpage Título de la página principal
+/*! \mainpage TDAs Letras.
+@image html ugr.png
+### Realizado por Juan Miguel Acosta ortega y Luis Soto Torres
 
 # Introducción
 
-A RELLENAR POR EL ESTUDIANTE
+En esta práctica, y las prácticas sucesivas, nos centraremos en el juego conocido como cifras y
+letras. Este juego, que se ha popularizado a través de concursos de televisión en distintos países.
+Nos centraremos de momento en la prueba de las letras. Exploraremos el juego de las cifras en las
+siguientes prácticas, debido a su mayor complejidad.
 
-# Ejecutables
+En esta práctica y las prácticas siguientes construiremos las estructuras de datos adecuadas para
+resolver el problema de las letras, así como programas que nos permitan obtener la solución a una
+partida.
 
-A RELLENAR POR EL ESTUDIANTE
+Estaremos especialmente interesados en dar una buena solución al problema de las letras. En esta
+primera práctica, estudiaremos qué información necesitamos almacenar, y cuál es la forma más
+adecuada de almacenarla, para poder jugar una partida al juego de las letras. En las prácticas
+siguientes, estudiaremos dos formas distintas de resolver el juego, que dependerá en parte de la
+estructura de datos subyacente.
+
+Para poder trabajar la práctica y atacarla de la manera más eficiente y lógica, se deberá hacer un estudio previo de los contenedores
+no lineales __map__ y __set__.
+
+###SET###
+La característica de SET es que todos los elementos se ordenarán automáticamente de acuerdo con el valor clave del elemento. El valor clave del conjunto es el valor real, y el valor real es el valor clave. SET no permite que dos elementos sean los mismos. El valor elemental del conjunto no se puede cambiar a través del iterador del conjunto, porque el valor del elemento conjunto es su valor clave, que está relacionado con la disposición del elemento SET. establecer <T> :: iterator se define como el const_itrator del árbol RB inferior.
+
+El conjunto y la lista tienen algunas de las mismas propiedades: cuando el cliente realiza la nueva operación o eliminación de la operación, todos los iteradores antes de que la operación también sea válida después de que se complete la operación.
+
+Debido a que el re-tree es un árbol binario equilibrado, el efecto de clasificación automática es bueno, el conjunto STL estándar utiliza el árbol RB como mecanismo subyacente.
+
+@image html set.png
+
+###MAP###
+Las características del mapa son que los elementos se ordenarán automáticamente de acuerdo con el valor clave del elemento. Todos los elementos de MAP son pares y tienen valores reales y valores clave. El primer elemento del par se considera un valor clave, y el segundo elemento se considera un valor real. MAP no permite que dos elementos tengan el mismo valor clave.
+
+Podemos modificar el valor real del elemento con el iterador del mapa, pero no podemos modificar el valor clave. Por lo tanto, los iteradores de MAP no son iterador constante ni un iterador mutable.
+
+El mapa y la lista tienen algunas de las mismas propiedades: cuando el cliente realiza nuevas operaciones o elimina operaciones en él, todos los iteradores antes de que la operación también sea válida después de que se complete la operación.
+
+El mapa STL estándar utiliza el árbol RB como mecanismo subyacente.
+
+@image html map.png
+
+##LettersSet##
+
+@image html lettersset.png
+
+La primera clase en realizar es la de LettersSet, y esta se implementa con la TDA "map<char , LetterInfo>", siendo LetterInfo un struct que nos proporciona información acerca del nº de veces que se repite
+una letra (el char).
+
+Para esta primera tarea se han de implementar distintos métodos, y la forma de trabajar sigue un poco el estilo de la anterior práctica, es decir, se han de programar diferentes métodos y sobrecargar ciertos operadores
+sobre un tipo de dato ya implementado en la STL, el map.
+
+Esta estructura de datos es perfecta para implementar nuestra clase LettersSet, ya que tienes diferentes "Keys (letras)", para acceder así a sus repeticiones y puntuaciones individuales.
+
+En esta primera parte se implementan diferentes funciones pero la principal es la de "getScore()", a la cuál se le saca una puntuación según las letras que lo componen:
+
+<div style="background-color:grey;border-color:black;border-width:thick;border-style:inset ;">
+<center style="color:orange;">`suma += this->getLetters()[letra_mayu].score;`</center>
+</div>
+
+y así pasándole por ejemplo la palabra "hola", nos saldría un resultado de "7" según el archivop de letras de ejemplo.
+
+Para probar esta clase se realizará un main llamado "conjunto_letras" que servirá para probar el nuevo operador de entrada metiéndole un archivo "letras" a un lettersset,
+y además se hará una llamada al método getScore().
+
+@image html letras.png
+
+__Particularidades de esta tarea:__
+
+Más adelante al realizar el "cantidad_letras" nos damos cuenta de que es mejor implementar también un iterador propio para esta clase
+en vez de intentar recorrerlo todo con el iterador propio del map, pues esto a veces puede obligar a pasar la parte privada de
+un lettersset a un map para recorrerlo, y eso no es una buena práctica.
+
+Hay que controlar diferentes cosas más allá de la propia práctica, es decir, que si se pàsa como argumento una palabra en minúscula se ha de pasar a mayúscula,
+quitar las líneas sobrantes del fichero pasado como argumento, no independizarse del tipo de dato con el iterador "auto" ...
+
+##Bag & LettersBag##
+
+Esta segundan tarea engloba tanto a la clase template "Bag" como a la clase "LettersBag".
+
+La clase Bag se implementa con un vector <T>, y será template para probarlo con diferentes tipos de datos, pero el objetivo principal será el de ser el dato interno de LettersBag, y ser de tipo "char".
+Esta es la clase más corta y casi todos los métodos implementados son genéricos, excepto el principal que es el de "get()". Este método se dedica a extraer un elemento aleatorio del vector, devolverlo, y eliminarlo del vector.
+
+@image html bag.png
+
+Para ello hacemos uso de la función rand() de c++:
+<div style="background-color:grey;border-color:black;border-width:thick;border-style:inset ;">
+<center style="color:orange;">`srand(time(NULL));`</center>
+<center style="color:orange;">`aux=rand()%v.size();`</center>
+</div>
+
+La clase  "LettersBag" como hemos comentado anteriormente se implementa con una bag de "chars", y estas letras serán las de un "LettersSet". La funcionalidad es parecida a la de bag, sin embargo cambian la implementación interna, su composición y su construcción.
+
+@image html lettersbag.png
+
+Estas dos clase se prueban respectivamente con los main "bolsa" y "bolsa_letras"; En ellos probamos las funcionalidades anteriormente explicadas ( meter números aleatorios en una bag y sacarlos, crear una LettersBag a partir de un LettersSet...)
+
+##Dictionary##
+
+Este es la última clase a realizar en la práctica, y esta está implementada con un "set<string>" que serán las palabras del diccionario. La estructura "set" nos facilita mucho el trbajo en esta implementación puesto
+que nos asegura que no habrá ningún elemento repetido, y que el diccionario ya estará ordenado alfabéticamente.
+
+@image html dictionary.png
+
+La forma en la que se implementan los métodos de esta clase es muy parecidaa la de las anteriores aunque esta, como LettersSet, tiene ciertos métodos originales como los son el
+__getOccurrences()__, que busca el número de veces que se encuentra una letra en todas las palabras del diccionario; Usando el iterador de un set<string> recorremos todas las palabras, y a su vez, utilizamos este for para recorrer
+las letras de cada palabra para ver si coincide con la pasada como argumento y aumentar un contador que será el que se devuelva:
+
+<div style="background-color:grey;border-color:black;border-width:thick;border-style:inset ;">
+<center style="color:orange;">` for (char (i) : (*it))`</center>
+</div>
+
+__getTotalLetters()__ lo que hace por otra parte es calcular el número de letras que contiene un diccionario, y por último también se implementa el __wordsOfLength()__ que devuelve un vector con las palabras del diccionario con la longitud pasada como argumento.
+
+Esta clase se prueba con dos main: en uno, palabras_longitud, se construye un "dictionary" con un fichero y se comprueba el correcto funcionamiento de __wordsOfLength()__, y en el otro, cantidad_letras, en este se construye un Dictionary con el fichero de palabras, un LettersSet con el fichero de letras, e imprime
+por pantalla, para cada letra en el LettersSet, el número de ocurrencias de la letra en el diccionario y su frecuencia relativa (es decir, el número total de ocurrencias de la letra entre el número total de letras en el diccionario).
 
 */
