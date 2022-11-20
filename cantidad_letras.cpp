@@ -11,14 +11,10 @@ using namespace std;
 /*
 bool existe (map<char, LetterInfo> letras,char letra){
     bool existe=true;
-
     map<char,LetterInfo>::iterator it;
-
     it=letras.find(letra);
-
     if (it == letras.end())
         existe=false;
-
     return existe;
 }*/
 
@@ -41,17 +37,15 @@ int main(int argc, char *argv[]){
     file2>>lettersSet;
 
     int num1=0;
-    float num2=0;
+    double num2=0;
     cout<<"Letra\tFAbs.\tFrel."<<endl;
 
     num2=diccionario.getTotalLetters();
 
     for( LettersSet::iterator it=lettersSet.begin();it!=lettersSet.end();it++){
-            num1 = diccionario.getOcurrences((*it).first);
-            cout << (*it).first << "\t" << num1 << "\t" << num1 / num2 << endl;
+        num1 = diccionario.getOcurrences((*it).first);
+        cout << (*it).first << "\t" << num1 << "\t" << num1 / num2 << endl;
     }
 
     return(0);
 }
-
-

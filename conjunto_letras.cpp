@@ -20,17 +20,13 @@ int main(int argc, char *argv[]){
     //LettersSet Letras(argv[1]); // hay que cambiar los parametros , los de ahora son para probar
     std::ifstream file2(argv[1]);
     LettersSet lettersSet;
-
     string aux;
     getline(file2,aux);
-
     file2>>lettersSet;
     cout << lettersSet.getScore(palabra) << endl;
 
     return(0);
 }
 // args data/letras.text hola
-
-
 
 

@@ -39,3 +39,4 @@ LettersBag LettersBag::operator=(const LettersBag &cl) {
     this->letters=cl.letters;
     return (*this);
 }
+

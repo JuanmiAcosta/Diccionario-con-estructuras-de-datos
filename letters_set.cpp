@@ -53,7 +53,7 @@ unsigned int LettersSet::size() const{
     return (this->letters.size());
 }
 
-int LettersSet::getScore (string word){
+int LettersSet::getScore (string word){ // SE PUEDE HACER CON TOUPPER, YA SE HARÁ.
     int suma=0;
     for ( string::iterator it=word.begin(); it!=word.end(); ++it){
         char letra_mayu=(*it);
@@ -80,20 +80,6 @@ ostream& operator << (ostream &os, const LettersSet &cl){
     }
     return os;
 }
-
-bool LettersSet::existe (char letra){
-    bool existe=true;
-
-    map<char,LetterInfo>::iterator it;
-
-    it=this->getLetters().find(letra);
-
-    if (it == this->getLetters().end())
-        existe=false;
-
-    return existe;
-}
-
 
 istream& operator >>(istream &is, LettersSet &cl){
     char Letra;    int Cant;    int Punt;
